@@ -1,0 +1,4 @@
+spring:
+  redis:
+    host: localhost
+    prot: 6379

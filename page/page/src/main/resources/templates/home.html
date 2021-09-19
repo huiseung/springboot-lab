@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_head">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}">
+    <title>Page</title>
+</head>
+<body>
+<!---
+model.Attribute 에 등록되어야 할 변수
+- posts
+- pageList
+- pageInfo
+-->
+<h1>page 기능을 실험해 봅니다.</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-horizontal table-bordered">
+                <thead class="thead-strong">
+                <tr>
+                    <th>게시글 번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                <tr th:each="post: ${posts}">
+                    <td th:text="${post.id}"></td>
+                    <td th:text="${post.title}"></td>
+                    <td th:text="${post.author}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div th:text="${pageList}"></div>
+
+    <div class="row" th:if="${pageInfo ne null}">
+        <div class="col-12">
+            <ul class="pagination pagination justify-content-center">
+                <li class="page-item" th:classappend="${!pageInfo.isPrevExist} ? disabled">
+                    <a class="page-link" href="#" th:href="${pageInfo.isPrevExist ? '/?page=' + (pageInfo?.pageList[0]-1) : ''}">&laquo;</a>
+                </li>
+                <li th:each="num: ${pageInfo.pageList}" class="page-item" th:classappend="${pageInfo.currentPageNum eq num} ? active">
+                    <a class="page-link" href="#" th:href="${'/?page=' + num}" th:text="${num}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!pageInfo.isNextExist} ? disabled">
+                    <a class="page-link" href="#" th:href="${pageInfo.isNextExist ? '/?page=' + (pageInfo?.pageList[0]+5) : ''}">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
