@@ -18,14 +18,14 @@ public class Account {
     private Holder holder;
 
     private String name;
-    private Long balance;
+    private long balance;
 
     public Account(String name){
         this.name = name;
         this.balance = 0L;
     }
 
-    public void setBalance(Long balance) {
+    public void setBalance(long balance) {
         this.balance = balance;
     }
 }
